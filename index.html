@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine’s Day 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9ecb, #ff6aa2);
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            overflow-x: hidden;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-top: 60px;
+            font-size: 3rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin-top: -10px;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .heart {
+            position: absolute;
+            top: -10px;
+            color: #ff2e63;
+            font-size: 20px;
+            animation: fall 4s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .button-container {
+            margin-top: 40px;
+            animation: fadeIn 4s ease-in-out;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background-color: white;
+            color: #ff2e63;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffe6f2;
+            transform: scale(1.1);
+        }
+
+        #videoContainer {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        video {
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Happy Valentine’s Day 💖</h1>
+    <p>4 years of friendship… and you still stuck with me 😭💗</p>
+    <p>Here’s something special for you 🎀</p>
+
+    <div class="button-container">
+        <button onclick="showVideo()">Click for your surprise 💞</button>
+    </div>
+
+    <div id="videoContainer">
+        <video controls>
+            <source src="yourvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        function showVideo() {
+            document.getElementById("videoContainer").style.display = "block";
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "💗";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+
+</body>
+</html>
