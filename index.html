@@ -1,124 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine’s Day 💖</title>
+  <title>Valentine(F)</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      margin-top: 60px;
+      background: linear-gradient(135deg, #ffb6e6, #ffd6f6);
+      overflow: hidden;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ff9ecb, #ff6aa2);
-            font-family: "Comic Sans MS", cursive, sans-serif;
-            overflow-x: hidden;
-            text-align: center;
-            color: white;
-        }
+    h1 {
+      animation: fadeIn 2s ease-in-out;
+      color: #5a3e5b;
+      font-size: 32px;
+    }
 
-        h1 {
-            margin-top: 60px;
-            font-size: 3rem;
-            animation: fadeIn 2s ease-in-out;
-        }
+    h3 {
+      color: #7a4a7a;
+      margin-top: -10px;
+      font-weight: normal;
+      animation: fadeIn 3s ease-in-out;
+    }
 
-        p {
-            font-size: 1.3rem;
-            margin-top: -10px;
-            animation: fadeIn 3s ease-in-out;
-        }
+    #yesBtn, #noBtn {
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .heart {
-            position: absolute;
-            top: -10px;
-            color: #ff2e63;
-            font-size: 20px;
-            animation: fall 4s linear infinite;
-        }
+    #yesBtn {
+      background-color: #ff5f8f;
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 95, 143, 0.4);
+    }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
+    #yesBtn:hover {
+      transform: scale(1.12);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    #noBtn {
+      background-color: #e6e6e6;
+      color: #444;
+    }
 
-        .button-container {
-            margin-top: 40px;
-            animation: fadeIn 4s ease-in-out;
-        }
+    video {
+      width: 80%;
+      max-width: 500px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            background-color: white;
-            color: #ff2e63;
-            transition: 0.3s;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        button:hover {
-            background-color: #ffe6f2;
-            transform: scale(1.1);
-        }
+    .heart {
+      position: absolute;
+      color: #ff5f8f;
+      font-size: 22px;
+      animation: floatUp 4s linear infinite;
+    }
 
-        #videoContainer {
-            display: none;
-            margin-top: 40px;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        video {
-            width: 90%;
-            max-width: 500px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-        }
-    </style>
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-600px); opacity: 0; }
+    }
+  </style>
 </head>
-
 <body>
 
-    <h1>Happy Valentine’s Day 💖</h1>
-    <p>4 years of friendship… and you still stuck with me 😭💗</p>
-    <p>Here’s something special for you 🎀</p>
+<h1>Will you be my Valentine… as a friend?</h1>
+<h3>4 years of friendship — kinda crazy how long we’ve known each other 💗</h3>
 
-    <div class="button-container">
-        <button onclick="showVideo()">Click for your surprise 💞</button>
-    </div>
+<!-- Your video goes right here -->
+<video controls>
+  <source src="https://drive.google.com/uc?export=download&id=1Hmgy6nuCIE2-_AhPC4TogTEra1wsv0j0" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-    <div id="videoContainer">
-        <video controls>
-            <source src="yourvideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+<button id="yesBtn" onclick="yes()">Yes 💖</button>
+<button id="noBtn" onclick="noClick()" onmouseover="moveNo()">No 😭</button>
 
-    <script>
-        function showVideo() {
-            document.getElementById("videoContainer").style.display = "block";
-        }
+<script>
+  let noTexts = [
+    "No 😭",
+    "You sure?",
+    "Really??",
+    "C’mon now",
+    "Try again 💅",
+    "Girl be fr 😭",
+    "You can't escape",
+    "Nice try 😌"
+  ];
+  let noIndex = 0;
 
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "💗";
-            heart.style.left = Math.random() * window.innerWidth + "px";
-            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-            document.body.appendChild(heart);
+  function yes() {
+    alert("Aww thanks friend 💖 4 years strong!");
+  }
 
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
+  function noClick() {
+    noIndex = (noIndex + 1) % noTexts.length;
+    document.getElementById("noBtn").innerText = noTexts[noIndex];
+  }
 
-        setInterval(createHeart, 300);
-    </script>
+  function moveNo() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 150);
+    btn.style.position = "absolute";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+  }
+
+  // Floating sparkles
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "✨";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = "600px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }, 500);
+</script>
 
 </body>
 </html>
